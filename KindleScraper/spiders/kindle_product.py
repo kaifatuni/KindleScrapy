@@ -1,5 +1,5 @@
 import scrapy
-from ..items import KindleScraperItem
+from ..items import KindleProductItem
 
 class KindleBotSpider(scrapy.Spider):
     name = 'kindle-product'
@@ -11,19 +11,23 @@ class KindleBotSpider(scrapy.Spider):
 
     def parse(self, response):
         product=KindleProductItem()
-        product_value=response.css(".a-text-bold+ span::text").extract()
-        product_col=response.css("#detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold::text").extract()
         
-        best_seller=response.css("#detailBullets_feature_div+ .detail-bullet-list > li > .a-list-item::text").extract()
+        value=response.css("#detailBullets_feature_div .a-text-bold+ span::text").extract()
+        col=response.css("#detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold::text").extract()
         
-        other_cat=response.css(".zg_hrsr .a-list-item::text").extract()
+        #detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold
         
         
+        best_seller=response.css("#detailBullets_feature_div+ .detail-bullet-list > li > .a-list-item span").extract()
+        
+        other_cat=response.css(".zg_hrsr .a-list-item span").extract()
+        
+        print('value',value)
         # no_reviews=response.css(".sg-col-12-of-20 .a-link-normal .a-size-base").css("::text").extract()
         # price=response.css(".sg-col-12-of-20 .a-price-whole::text").extract()
         # image_url=response.css("#detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold::text").css("::attr(src)").extract()
-        product["product_value"]=product_value
-        product["product_col"]=product_col
+        product["product_value"]=value
+        product["product_col"]=col
         product["best_seller"]=best_seller
         product["other_cat"]=other_cat
         yield product
