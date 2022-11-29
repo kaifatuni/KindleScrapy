@@ -8,7 +8,7 @@ class KindleBotSpider(scrapy.Spider):
     count=1
     start_urls = [
         # 'file:D:\Codes\Python\KindleScraper\product.html'
-        'https://www.amazon.in/dp/B074LZG7KS'
+        'https://www.amazon.in/dp/B07BHG29M6'
         # "https://www.amazon.com/s?k=iphone&page=1&qid=1624792241&ref=sr_pg_2"               
         ]
 
