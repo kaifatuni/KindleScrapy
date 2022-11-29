@@ -30,7 +30,7 @@ def first_num_from_str_coma(data):
 def price(data):
     # print('\n\n',data)
     data1 = data.split('\n')[0].strip()
-    data2 = float(data.split('₹')[1].split()[0])
+    data2 = float(data.split('₹')[1].split()[0].replace(',', ''))
     # data3 = [int(i) for i in data2.split() if i.isdigit()][0]
     return { data1:data2 }
     
