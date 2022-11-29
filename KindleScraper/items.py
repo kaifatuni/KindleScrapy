@@ -5,6 +5,14 @@
 
 import scrapy
 
+class KindleProductItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    # pass
+    product_value = scrapy.Field()
+    product_col=scrapy.Field()
+    best_seller=scrapy.Field()
+    other_cat=scrapy.Field()
 
 class KindleScraperItem(scrapy.Item):
     # define the fields for your item here like:

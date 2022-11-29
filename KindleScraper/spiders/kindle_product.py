@@ -10,15 +10,22 @@ class KindleBotSpider(scrapy.Spider):
         ]
 
     def parse(self, response):
-        product=KindleScraperItem()
-        name=response.css(".a-size-medium.a-text-normal::text").extract()
-        no_reviews=response.css(".sg-col-12-of-20 .a-link-normal .a-size-base").css("::text").extract()
-        price=response.css(".sg-col-12-of-20 .a-price-whole::text").extract()
-        image_url=response.css(".s-image-fixed-height .s-image").css("::attr(src)").extract()
-        product["p_name"]=name
-        product["p_reviews"]=no_reviews
-        product["p_price"]=price
-        product["url"]=image_url
+        product=KindleProductItem()
+        product_value=response.css(".a-text-bold+ span::text").extract()
+        product_col=response.css("#detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold::text").extract()
+        
+        best_seller=response.css("#detailBullets_feature_div+ .detail-bullet-list > li > .a-list-item::text").extract()
+        
+        other_cat=response.css(".zg_hrsr .a-list-item::text").extract()
+        
+        
+        # no_reviews=response.css(".sg-col-12-of-20 .a-link-normal .a-size-base").css("::text").extract()
+        # price=response.css(".sg-col-12-of-20 .a-price-whole::text").extract()
+        # image_url=response.css("#detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold::text").css("::attr(src)").extract()
+        product["product_value"]=product_value
+        product["product_col"]=product_col
+        product["best_seller"]=best_seller
+        product["other_cat"]=other_cat
         yield product
     
         # KindleBotSpider.count+=1
