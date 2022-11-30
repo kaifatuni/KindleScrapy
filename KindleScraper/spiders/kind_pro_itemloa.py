@@ -20,15 +20,8 @@ class KindleBotSpider(scrapy.Spider):
         
         loader.add_value('response', response.body)
         
-        try: 
-            r = {
-                'response.request.body':response.request.body,
-                'response.request.headers':response.request.headers
-                # 'response.request.cookies':response.request.cookies
-             }
-        except:
-            r= "none"
-        loader.add_value('requestbody', r)
+
+        loader.add_value('requestbody', str(response.request))
         loader.add_value('request', response.request)
         
         # value=response.css("#detailBullets_feature_div .a-text-bold+ span::text").extract()
