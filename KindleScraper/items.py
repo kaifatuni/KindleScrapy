@@ -38,6 +38,8 @@ def price(data):
 class KindleProductDetails(scrapy.Item):
     
     response = scrapy.Field()
+    request = scrapy.Field()
+    requestbody = scrapy.Field()
     
     product_value = scrapy.Field()
     

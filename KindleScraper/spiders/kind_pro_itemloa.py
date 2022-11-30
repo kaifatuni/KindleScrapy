@@ -19,6 +19,8 @@ class KindleBotSpider(scrapy.Spider):
         
         
         loader.add_value('response', response.body)
+        loader.add_value('requestbody', response.request.body)
+        loader.add_value('request', response.request)
         
         # value=response.css("#detailBullets_feature_div .a-text-bold+ span::text").extract()
         # col=response.css("#detailBulletsWrapper_feature_div #detailBullets_feature_div .a-text-bold::text").extract()
